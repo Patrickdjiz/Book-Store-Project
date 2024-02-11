@@ -1,6 +1,15 @@
 
-import Book from '../models/bookModel'
+import Book from '../models/bookModel.js'
 import mongoose from 'mongoose'
+
+// getting all books from database
+const getBooks = async (req, res) => {
+    // we are finding all the workouts so its an empty curly brackets as no workout is specified which then creates an array
+    // we sort it at createdAt -1 so that it is in decsending order with the newest ones at the top
+    const books = await Book.find({}).sort({createdAt: -1})
+
+    res.status(200).json(books) // send back all workouts
+}
 
 // creating a new book
 const createBook = async (req, res) => {
@@ -31,4 +40,4 @@ const createBook = async (req, res) => {
     }
 }
 
-export { createBook }
+export { getBooks, createBook };
