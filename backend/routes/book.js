@@ -1,7 +1,7 @@
 // thie file is for handling routes which is the response to a request
 
 import express from "express";
-import { getBooks, createBook } from '../controllers/bookController.js';
+import { getBooks, getBook, createBook, updateBook, deleteBook } from '../controllers/bookController.js';
 
 const router = express.Router()
 
@@ -10,7 +10,16 @@ const router = express.Router()
 // GET all books
 router.get('/', getBooks)
 
+// GET a single book
+router.get('/:id', getBook)
+
 // POST router to create a new workout
 router.post('/', createBook)
+
+// UPDATE a book
+router.patch('/:id', updateBook)
+
+// DELETE a book
+router.delete('/:id', deleteBook)
 
 export default router;

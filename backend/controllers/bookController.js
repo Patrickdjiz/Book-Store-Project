@@ -8,7 +8,28 @@ const getBooks = async (req, res) => {
     // we sort it at createdAt -1 so that it is in decsending order with the newest ones at the top
     const books = await Book.find({}).sort({createdAt: -1})
 
-    res.status(200).json(books) // send back all workouts
+    res.status(200).json({
+        // getting the count of how many books
+        count: books.length,
+        data: books
+    }) 
+}
+
+const getBook = async (req, res) => {
+    const {id} = req.params // the id is within the request parameters when we send the path
+    
+    if(!mongoose.Types.ObjectId.isValid(id)) { // this method checks if the id is not a valid id type e.g Strings
+        return res.status(404).json({error: 'No such book'})
+    }
+
+    const book = await Book.findById(id)
+
+    // check if the book does not exist from the id
+    if(!book) {
+        return res.status(404).json({error: 'No such book'})
+    }
+
+    res.status(200).json(book)
 }
 
 // creating a new book
@@ -40,4 +61,41 @@ const createBook = async (req, res) => {
     }
 }
 
-export { getBooks, createBook };
+// updating a book
+const updateBook = async (req,res) => {
+    const {id} = req.params
+    
+    if(!mongoose.Types.ObjectId.isValid(id)) {
+        res.status(404).json({error: 'No such book'})
+    }
+
+    // we spread the body of the current data in the request object body and update the body of the id we are given
+    const book = await Book.findOneandUpdate({_id:id}, {
+        ...req.body
+    })
+
+    if(!book) {
+        res.status(404).json({error: 'No such book'})
+    }
+
+    res.status(200).json(book)
+}
+
+// delete a book
+const deleteBook = async (req,res) => {
+    const {id} = req.params
+
+    if(!mongoose.Types.ObjectId.isValid(id)) {
+        res.status(404).json({error: 'No such book'})
+    }
+
+    const book = await Book.findOneandDelete({_id:id})
+
+    if(!book) {
+        res.status(404).json({error: 'No such book'})
+    }
+
+    res.status(200).json(book)
+}
+
+export { getBooks, getBook, createBook, updateBook, deleteBook };
