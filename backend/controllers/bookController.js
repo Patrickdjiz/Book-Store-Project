@@ -69,10 +69,7 @@ const updateBook = async (req,res) => {
         res.status(404).json({error: 'No such book'})
     }
 
-    // we spread the body of the current data in the request object body and update the body of the id we are given
-    const book = await Book.findOneandUpdate({_id:id}, {
-        ...req.body
-    })
+    const book = await Book.findByIdAndUpdate(id, req.body)
 
     if(!book) {
         res.status(404).json({error: 'No such book'})
@@ -89,7 +86,7 @@ const deleteBook = async (req,res) => {
         res.status(404).json({error: 'No such book'})
     }
 
-    const book = await Book.findOneandDelete({_id:id})
+    const book = await Book.findByIdAndDelete(id)
 
     if(!book) {
         res.status(404).json({error: 'No such book'})
