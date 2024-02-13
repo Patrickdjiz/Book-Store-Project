@@ -1,6 +1,7 @@
 import express from "express";
 import { PORT, mongoDBURL } from "./config.js"
 import mongoose from 'mongoose'
+import cors from 'cors'
 
 const app = express();
 
@@ -8,6 +9,16 @@ import router from './routes/book.js';
 
 // middleware for parsing request body
 app.use(express.json());
+
+// Middleware for handling CORS (Cross-Origin Resource Sharing) Policy
+// CORS is web security mechanism that prevents unauthorized cross-origin access to a resource or server 
+app.use(
+    cors({
+        origin: 'http://localhost:3000', // so only the clients with this origin can access this server
+        methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+        allowedHeaders: [ 'Content-Type' ]
+    })
+)
 
 // we are sending any request to our routes file and with express.json above, it sends any data to the request body with it
 app.use('/api/book', router)
