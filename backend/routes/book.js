@@ -20,6 +20,6 @@ router.post('/', createBook)
 router.patch('/:id', updateBook)
 
 // DELETE a book
-router.delete('/:id', del)
+router.delete('/:id', deleteBook)
 
 export default router;
