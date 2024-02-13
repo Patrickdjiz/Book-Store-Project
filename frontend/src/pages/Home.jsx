@@ -12,7 +12,7 @@ export const Home = () => {
     useEffect(() => {
         setLoading(true);
         axois
-            .get('http://localhost:5555/book') // we set the axois to the backend route to get our books list
+            .get('http://localhost:5555/books') // we set the axois to the backend route to get our books list
             .then((response) => { // the response of our .get is the collection of books
                 setBooks(response.data.data); // we set the response.data (data of the response) to the data of the Books
                 setLoading(false); // then we set loading back to false
@@ -27,7 +27,7 @@ export const Home = () => {
     <div className='p-4'>
         <div className='flex justify-between items-center'>
             <h1 className='text-3xl my-8'>Books List</h1>
-            <Link to='/book/create'>
+            <Link to='/books/create'>
                 <MdOutlineAddBox className='text-sky-800 text-4xl'/>
             </Link>
         </div>
@@ -61,13 +61,13 @@ export const Home = () => {
                             </td>
                             <td className='border border-slate-700 rounded-md text-center'>
                                 <div className='flex justify-center gap-x-4'>
-                                    <Link to={'/book/details/${book._id}'}>
+                                    <Link to={'/books/details/${book._id}'}>
                                         <BsInfoCircle className='text-2x1 text-green-800'/>
                                     </Link>
-                                    <Link to={'/book/edit/${book._id}'}>
+                                    <Link to={'/books/edit/${book._id}'}>
                                         <AiOutlineEdit className='text-2xl text-yellow-600'/>
                                     </Link>
-                                    <Link to={'/book/delete/${book._id}'}>
+                                    <Link to={'/books/delete/${book._id}'}>
                                         <MdOutlineDelete className='text-2xl text-red-600'/>
                                     </Link>
                                 </div>

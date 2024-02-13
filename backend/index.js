@@ -21,7 +21,7 @@ app.use(express.json());
 ) */
 
 // we are sending any request to our routes file and with express.json above, it sends any data to the request body with it
-app.use('/api/book', router)
+app.use('/books', router)
 
 
 // we only want the app to listen to our PORT if we are able to first connect to our db
