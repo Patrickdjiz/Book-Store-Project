@@ -8,7 +8,7 @@ const getBooks = async (req, res) => {
     // we sort it at createdAt -1 so that it is in decsending order with the newest ones at the top
     const books = await Book.find({}).sort({createdAt: -1})
 
-    res.status(200).json(books)
+    return res.status(200).json(books)
 }
 
 const getBook = async (req, res) => {
@@ -25,7 +25,7 @@ const getBook = async (req, res) => {
         return res.status(404).json({error: 'No such book'})
     }
 
-    res.status(200).json(book)
+    return res.status(200).json(book)
 }
 
 // creating a new book
@@ -51,9 +51,9 @@ const createBook = async (req, res) => {
      // adds document to database
     try {
         const book = await Book.create({title, author, publishYear}) // we are creating a book from our model and then storing it into the book constant
-        res.status(200).json(book) // status 200 means good. The json we are sending back is the book object/document
+        return res.status(200).json(book) // status 200 means good. The json we are sending back is the book object/document
     } catch (error) {
-        res.status(400).json({error: error.message})
+        return res.status(400).json({error: error.message})
     }
 }
 
@@ -62,16 +62,16 @@ const updateBook = async (req,res) => {
     const {id} = req.params
     
     if(!mongoose.Types.ObjectId.isValid(id)) {
-        res.status(404).json({error: 'No such book'})
+        return res.status(404).json({error: 'No such book'})
     }
 
-    const book = await Book.findByIdAndUpdate(id, req.body)
+    const book = await Book.findByIdAndUpdate(id, req.body, { new: true })
 
     if(!book) {
-        res.status(404).json({error: 'No such book'})
+       return res.status(404).json({error: 'No such book'})
     }
 
-    res.status(200).json(book)
+    return res.status(200).json(book)
 }
 
 // delete a book
@@ -79,16 +79,16 @@ const deleteBook = async (req,res) => {
     const {id} = req.params
 
     if(!mongoose.Types.ObjectId.isValid(id)) {
-        res.status(404).json({error: 'No such book'})
+        return res.status(404).json({error: 'No such book'})
     }
 
     const book = await Book.findByIdAndDelete(id)
 
     if(!book) {
-        res.status(404).json({error: 'No such book'})
+       return res.status(404).json({error: 'No such book'})
     }
 
-    res.status(200).json(book)
+    return res.status(200).json(book)
 }
 
 export { getBooks, getBook, createBook, updateBook, deleteBook };
