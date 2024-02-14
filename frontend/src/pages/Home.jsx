@@ -1,15 +1,14 @@
-import React, { useEffect, useState} from 'react'
-import axios from 'axios'
-import Spinner from '../components/Spinner'
-import { Link } from 'react-router-dom'
-import { AiOutlineEdit } from 'react-icons/ai'
-import { BsInfoCircle } from 'react-icons/bs'
-import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md'
+import React, { useEffect, useState} from 'react';
+import axios from 'axios';
+import Spinner from '../components/Spinner';
+import { Link } from 'react-router-dom';
+import { AiOutlineEdit } from 'react-icons/ai';
+import { BsInfoCircle } from 'react-icons/bs';
+import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
 
 export const Home = () => {
-    console.log("hiawofduvhiafrgakgfjbklajfwv")
-    const [books, setBooks] = useState([])
-    const [loading, setLoading] = useState(false) // the loading is the icon for loading before home page
+    const [books, setBooks] = useState([]);
+    const [loading, setLoading] = useState(false); // the loading is the icon for loading before home page
     useEffect(() => {
         setLoading(true);
         axios
@@ -19,9 +18,9 @@ export const Home = () => {
                 setLoading(false); // then we set loading back to false
             })
             .catch((error) => {
-                console.log(error)
+                console.log(error);
             })
-    }, []) 
+    }, []);
 
     // this is where the homepage will be displayed
   return (
