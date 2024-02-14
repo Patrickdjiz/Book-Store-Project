@@ -14,7 +14,7 @@ export const Home = () => {
         axios
             .get('http://localhost:5555/books') // we set the axois to the backend route to get our books list
             .then((response) => { // the response of our .get is the collection of books
-                setBooks(response.data.data); // we set the response.data (data of the response) to the data of the Books
+                setBooks(response.data); // we set the response.data (data of the response) to the data of the Books
                 setLoading(false); // then we set loading back to false
             })
             .catch((error) => {
