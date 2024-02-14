@@ -1,5 +1,5 @@
 import React, { useEffect, useState} from 'react'
-import axois from 'axios'
+import axios from 'axios'
 import Spinner from '../components/Spinner'
 import { Link } from 'react-router-dom'
 import { AiOutlineEdit } from 'react-icons/ai'
@@ -7,11 +7,12 @@ import { BsInfoCircle } from 'react-icons/bs'
 import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md'
 
 export const Home = () => {
+    console.log("hiawofduvhiafrgakgfjbklajfwv")
     const [books, setBooks] = useState([])
     const [loading, setLoading] = useState(false) // the loading is the icon for loading before home page
     useEffect(() => {
         setLoading(true);
-        axois
+        axios
             .get('http://localhost:5555/books') // we set the axois to the backend route to get our books list
             .then((response) => { // the response of our .get is the collection of books
                 setBooks(response.data.data); // we set the response.data (data of the response) to the data of the Books
@@ -20,7 +21,7 @@ export const Home = () => {
             .catch((error) => {
                 console.log(error)
             })
-    }, [])
+    }, []) 
 
     // this is where the homepage will be displayed
   return (
@@ -37,11 +38,11 @@ export const Home = () => {
             <table className='w-full border-seperate border-spacing 2'>
                 <thead>
                     <tr>
-                        <th className='boder border-slate-600 rounded-md'>No</th>
-                        <th className='boder border-slate-600 rounded-md'>Title</th>
-                        <th className='boder border-slate-600 rounded-md max-md:hidden'>Author</th>
-                        <th className='boder border-slate-600 rounded-md max-md:hidden'>Publish Year</th>
-                        <th className='boder border-slate-600 rounded-md'>Operations</th>
+                        <th className='border border-slate-600 rounded-md'>No</th>
+                        <th className='border border-slate-600 rounded-md'>Title</th>
+                        <th className='border border-slate-600 rounded-md max-md:hidden'>Author</th>
+                        <th className='border border-slate-600 rounded-md max-md:hidden'>Publish Year</th>
+                        <th className='border border-slate-600 rounded-md'>Operations</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,13 +62,13 @@ export const Home = () => {
                             </td>
                             <td className='border border-slate-700 rounded-md text-center'>
                                 <div className='flex justify-center gap-x-4'>
-                                    <Link to={'/books/details/${book._id}'}>
+                                    <Link to={`/books/details/${book._id}`}>
                                         <BsInfoCircle className='text-2x1 text-green-800'/>
                                     </Link>
-                                    <Link to={'/books/edit/${book._id}'}>
+                                    <Link to={`/books/edit/${book._id}`}>
                                         <AiOutlineEdit className='text-2xl text-yellow-600'/>
                                     </Link>
-                                    <Link to={'/books/delete/${book._id}'}>
+                                    <Link to={`/books/delete/${book._id}`}>
                                         <MdOutlineDelete className='text-2xl text-red-600'/>
                                     </Link>
                                 </div>

@@ -8,11 +8,7 @@ const getBooks = async (req, res) => {
     // we sort it at createdAt -1 so that it is in decsending order with the newest ones at the top
     const books = await Book.find({}).sort({createdAt: -1})
 
-    res.status(200).json({
-        // getting the count of how many books
-        count: books.length,
-        data: books
-    }) 
+    res.status(200).json(books)
 }
 
 const getBook = async (req, res) => {
