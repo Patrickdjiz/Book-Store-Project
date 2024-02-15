@@ -17,7 +17,7 @@ router.get('/:id', getBook)
 router.post('/', createBook)
 
 // UPDATE a book
-router.patch('/:id', updateBook)
+router.put('/:id', updateBook)
 
 // DELETE a book
 router.delete('/:id', deleteBook)
