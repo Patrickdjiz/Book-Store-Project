@@ -16,16 +16,16 @@ const EditBooks = () => {
       axios
       .get(`http://localhost:5555/books/${id}`)
       .then((response) => {
-        setTitle(response.data.title)
-        setAuthor(response.data.author)
-        setPublishYear(response.data.publishYear)
-        setLoading(false)
+          setAuthor(response.data.author)
+          setPublishYear(response.data.publishYear)
+          setTitle(response.data.title)
+          setLoading(false)
       }).catch((error) => {
-        setLoading(false)
-        alert('An error happened. Please check console')
-        console.log(error)
+          setLoading(false)
+          alert('An error happened. Please check console')
+          console.log(error)
       })
-    })
+    }, [])
     const handleEditBook = () => {
         const data = {
             title,
